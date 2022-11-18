@@ -7,9 +7,7 @@
 
 // CODE HERE
 
-multiply = (num1, num2, answer) => {
-  console.log(answer = num1 * num2)
-}
+const multiply = (x, y, cb) => cb(x * y)
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
@@ -40,18 +38,17 @@ var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan']
 
 // CODE HERE 
 
-const first = (arr, firstName) => {
-  firstName(arr[0])
-}
+const first = (arr, cb) => cb(arr[0])
+
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
 first(names, firstName => {
-  console.log('The first name in names is ' + firstName)
-})
-
+    console.log('The first name in names is ' + firstName)
+  })
+  
 
 
 ////////// PROBLEM 3 //////////
@@ -63,9 +60,7 @@ first(names, firstName => {
 
 // CODE HERE
 
-const last = (arr, lastName) => {
-  lastName(arr[arr.length -1])
-}
+const last = (arr, cb) => cb(arr[arr.length - 1])
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
@@ -75,7 +70,6 @@ const last = (arr, lastName) => {
 last(names, lastName => {
   console.log('The last name in names is ' + lastName)
 })
-
 
 
 ////////// PROBLEM 4 //////////
@@ -89,10 +83,13 @@ last(names, lastName => {
 
 // CODE HERE 
 
-const contains = (arr, name, isThere) => {
-  isThere(arr.includes(name))
+const contains = (arr, name, cb) => {
+    if (arr.includes(name) === true) {
+        cb(true)
+    }else{
+        cb(false)
+    }
 }
-
 
 
 // UNCOMMENT THE FUNCTION CALL BELOW
@@ -108,7 +105,6 @@ contains(names, 'Colt', result => {
 })
 
 
-
 ////////// PROBLEM 5 //////////
 
 /*
@@ -118,20 +114,8 @@ contains(names, 'Colt', result => {
 */
 
 // CODE HERE
-const uniq = (arr, cb) => {
-  for (let i = 0; i < arr.length; i++)
-    for (let j = i + 1; j < arr.length; j++){
-      if(arr[i] === arr[j])
-      arr.splice(j, 1)
-      j--
-    }
-  return cb(arr)
-}
 
-let newSet = new Set(arr)
-console.log(newSet)
-let newArr = [...newSet]
-console.log(newArr)
+const uniq = (arr, cb) => cb(new Set(arr))
 
 
 /*
@@ -143,9 +127,9 @@ console.log(newArr)
 
 // CODE HERE
 
-uniq(names, (uniqArr) => {
-  console.log(`The new names array with all the duplicate items removed is ${uniqArr}`)
-})
+uniq(names, uniqArr => {
+        console.log('The new names array with all the duplicate items removed is ' + uniqArr)
+      })
 
 
 
@@ -158,9 +142,7 @@ uniq(names, (uniqArr) => {
 
 // CODE HERE 
 
-const each = (arr, cb) => {
-  arr.forEach((el, i) => cb(ei,i))
-}
+const each = (arr, cb) => arr.forEach((elem,ind) => cb(elem,ind))
 
 /*
   Invoke the each function, passing in the names array and a callback function.
@@ -171,7 +153,9 @@ const each = (arr, cb) => {
 
 // CODE HERE
 
-each(names, (item, index) => `The item at index ${index} is ${item}`)
+each(names, (item, index) => {
+    console.log(`The item at index ${index} is ${item}.`)
+})
 
 ////////// PROBLEM 7 //////////
 
@@ -207,12 +191,11 @@ var users = [
 // CODE HERE 
 
 const getUserById = (arr, id, cb) => {
-  for (let i = 0; i < arr.length; i++){
-    let obj = arr[i]
-    if(obj.id === id) {
-      return cb(obj)
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id === id) {
+        return cb(arr[i])
     }
-  }
+}
 }
 
 // UNCOMMENT THE FUNCTION CALL BELOW
